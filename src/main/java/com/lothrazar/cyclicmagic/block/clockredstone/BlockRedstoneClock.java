@@ -36,6 +36,7 @@ import com.lothrazar.cyclicmagic.util.UtilParticle;
 import net.minecraft.block.BlockLever;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Items;
@@ -55,7 +56,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class BlockRedstoneClock extends BlockBaseHasTile implements IHasRecipe, IContent {
 
   private static final int PARTICLE_DENSITY = 2;
-  public static final PropertyBool POWERED = BlockLever.POWERED;//PropertyBool.create("powered");
+  public static final PropertyBool POWERED = BlockLever.POWERED;
+  private static final PropertyEnum<EnumFacing> FACING = PropertyEnum.create("facing", EnumFacing.class);
 
   public BlockRedstoneClock() {
     super(Material.IRON);
@@ -141,4 +143,20 @@ public class BlockRedstoneClock extends BlockBaseHasTile implements IHasRecipe, 
         'r', "dustRedstone",
         'q', Items.REPEATER);
   }
+
+  //  @Override
+  //  public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
+  //    if (!state.getValue(POWERED)) {
+  //      return super.getActualState(state, world, pos);
+  //    }
+  //    TileEntity tile = world.getTileEntity(pos);
+  //    if (tile instanceof TileEntityClock) {
+  //      // 
+  //      //      TileEntityClock clock = (TileEntityClock) tile;
+  //      //      if (!clock.getSideHasPower(EnumFacing.UP)) {
+  //      //        state = state.withProperty(FACING, EnumFacing.UP);
+  //      //      }
+  //    }
+  //    return super.getActualState(state, world, pos);
+  //  }
 }

@@ -130,7 +130,6 @@ public class BlockBattery extends BlockBaseHasTile implements IHasRecipe, IConte
   @SuppressWarnings("deprecation")
   @Override
   public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
-    //?? world instanceof ChunkCache ? ((ChunkCache) world).getTileEntity(pos, Chunk.EnumCreateEntityType.CHECK) : 
     TileEntity tile = world.getTileEntity(pos);
     if (tile instanceof TileEntityBattery) {
       IEnergyStorage handlerHere = tile.getCapability(CapabilityEnergy.ENERGY, null);
