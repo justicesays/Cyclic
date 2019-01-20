@@ -1,6 +1,24 @@
 {
+  "forge_marker": 1,
+    "defaults": {
+        "textures": {
+			"all": "cyclicmagic:blocks/clock_on"
+        },
+        "model": "cyclicmagic:blocks/clock",
+        "uvlock": true
+    },
     "variants": {
-        "powered=true":  { "model": "cyclicmagic:clock_on" },
-        "powered=false": { "model": "cyclicmagic:clock_off" }
+        "powered":  {
+			"true":{
+				"textures": {
+					"all": "cyclicmagic:blocks/clock_on"
+				}
+			},
+			"false":{
+				"textures": {
+					"all": "cyclicmagic:blocks/clock_off"
+				}
+			}
+		}
     }
 }
