@@ -2,36 +2,21 @@
   "forge_marker": 1,
     "defaults": {
         "textures": {
-			"down" : "cyclicmagic:blocks/clock_on",
-			"up"   : "cyclicmagic:blocks/clock_on",
-			"north": "cyclicmagic:blocks/clock_on",
-			"south": "cyclicmagic:blocks/clock_on",
-			"west" : "cyclicmagic:blocks/clock_on",
-			"east" : "cyclicmagic:blocks/clock_on"
+			"down" : "cyclicmagic:blocks/clock_off",
+			"up"   : "cyclicmagic:blocks/clock_off",
+			"north": "cyclicmagic:blocks/clock_off",
+			"south": "cyclicmagic:blocks/clock_off",
+			"west" : "cyclicmagic:blocks/clock_off",
+			"east" : "cyclicmagic:blocks/clock_off"
         },
         "model": "cyclicmagic:clock",
         "uvlock": true
     },
     "variants": {
-        "powered":  {
+		"u":{
 			"true":{
 				"textures": {
-					"down" : "cyclicmagic:blocks/clock_on",
-					"up"   : "cyclicmagic:blocks/clock_on",
-					"north": "cyclicmagic:blocks/clock_on",
-					"south": "cyclicmagic:blocks/clock_on",
-					"west" : "cyclicmagic:blocks/clock_on",
-					"east" : "cyclicmagic:blocks/clock_on"
-				}
-			},
-			"false":{
-				"textures": {
-					"down" : "cyclicmagic:blocks/clock_off",
-					"up"   : "cyclicmagic:blocks/clock_off",
-					"north": "cyclicmagic:blocks/clock_off",
-					"south": "cyclicmagic:blocks/clock_off",
-					"west" : "cyclicmagic:blocks/clock_off",
-					"east" : "cyclicmagic:blocks/clock_off"
+					"up"   : "cyclicmagic:blocks/battery_infinite"
 				}
 			}
 		}

@@ -25,6 +25,7 @@ package com.lothrazar.cyclicmagic.block.clockredstone;
 
 import java.util.Random;
 import com.lothrazar.cyclicmagic.IContent;
+import com.lothrazar.cyclicmagic.ModCyclic;
 import com.lothrazar.cyclicmagic.block.core.BlockBaseHasTile;
 import com.lothrazar.cyclicmagic.data.IHasRecipe;
 import com.lothrazar.cyclicmagic.gui.ForgeGuiHandler;
@@ -35,8 +36,8 @@ import com.lothrazar.cyclicmagic.util.Const;
 import com.lothrazar.cyclicmagic.util.UtilParticle;
 import net.minecraft.block.BlockLever;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Items;
@@ -57,7 +58,12 @@ public class BlockRedstoneClock extends BlockBaseHasTile implements IHasRecipe, 
 
   private static final int PARTICLE_DENSITY = 2;
   public static final PropertyBool POWERED = BlockLever.POWERED;
-  private static final PropertyEnum<EnumFacing> FACING = PropertyEnum.create("facing", EnumFacing.class);
+  private static final PropertyBool U = PropertyBool.create("u");
+  private static final PropertyBool D = PropertyBool.create("d");
+  private static final PropertyBool N = PropertyBool.create("n");
+  private static final PropertyBool E = PropertyBool.create("e");
+  private static final PropertyBool S = PropertyBool.create("s");
+  private static final PropertyBool W = PropertyBool.create("w");
 
   public BlockRedstoneClock() {
     super(Material.IRON);
@@ -84,7 +90,8 @@ public class BlockRedstoneClock extends BlockBaseHasTile implements IHasRecipe, 
 
   @Override
   protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, POWERED);
+    //  return super.createBlockState();
+    return new BlockStateContainer(this, new IProperty[] { POWERED, U, D, N, E, S, W });
   }
 
   @Override
@@ -144,19 +151,28 @@ public class BlockRedstoneClock extends BlockBaseHasTile implements IHasRecipe, 
         'q', Items.REPEATER);
   }
 
-  //  @Override
-  //  public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
-  //    if (!state.getValue(POWERED)) {
-  //      return super.getActualState(state, world, pos);
-  //    }
-  //    TileEntity tile = world.getTileEntity(pos);
-  //    if (tile instanceof TileEntityClock) {
-  //      // 
-  //      //      TileEntityClock clock = (TileEntityClock) tile;
-  //      //      if (!clock.getSideHasPower(EnumFacing.UP)) {
-  //      //        state = state.withProperty(FACING, EnumFacing.UP);
-  //      //      }
-  //    }
-  //    return super.getActualState(state, world, pos);
-  //  }
+  @Override
+  public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
+    if (!state.getValue(POWERED)) {
+      return super.getActualState(state, world, pos);
+    }
+    TileEntity tile = world.getTileEntity(pos);
+    if (tile instanceof TileEntityClock) {
+      // 
+      TileEntityClock clock = (TileEntityClock) tile;
+      try {
+        state.withProperty(U, clock.getSideHasPower(EnumFacing.UP));
+        state.withProperty(D, clock.getSideHasPower(EnumFacing.DOWN));
+        state.withProperty(N, clock.getSideHasPower(EnumFacing.NORTH));
+        state.withProperty(E, clock.getSideHasPower(EnumFacing.EAST));
+        state.withProperty(S, clock.getSideHasPower(EnumFacing.SOUTH));
+        state.withProperty(W, clock.getSideHasPower(EnumFacing.WEST));
+      }
+      catch (Exception e) {
+        ModCyclic.logger.error("???", e);
+      }
+      ModCyclic.logger.error(state.getValue(U) + "?");
+    }
+    return super.getActualState(state, world, pos);
+  }
 }

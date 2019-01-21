@@ -196,7 +196,6 @@ public class BlockBattery extends BlockBaseHasTile implements IHasRecipe, IConte
 
   @Override
   protected BlockStateContainer createBlockState() {
-    //  return super.createBlockState();
     return new BlockStateContainer(this, new IProperty[] { AMOUNT });
   }
 
