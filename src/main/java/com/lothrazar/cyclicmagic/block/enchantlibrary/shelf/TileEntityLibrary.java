@@ -74,17 +74,16 @@ public class TileEntityLibrary extends TileEntityBaseMachine implements ITickabl
   private boolean addEnchantment(QuadrantEnum area, Enchantment ench, int level) {
     int index = area.ordinal();
     EnchantStack enchStackCurrent = storage[index];
-    if (enchStackCurrent.getCount() >= MAX_COUNT) {
-      return false;
-    }
     if (enchStackCurrent.isEmpty()) {
       enchStackCurrent = new EnchantStack(ench, level);
       storage[index] = enchStackCurrent;
       return true;
     }
     else if (enchStackCurrent.doesMatch(ench, level)) {
-      enchStackCurrent.add();
-      storage[index] = enchStackCurrent;
+       if (enchStackCurrent.getCount() < MAX_COUNT) {
+          enchStackCurrent.add();
+          storage[index] = enchStackCurrent;
+       }
       return true;
     }
     else {
